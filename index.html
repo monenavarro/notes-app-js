@@ -6,7 +6,8 @@
    <body>
       <h1>Notes app</h1>
       <div id="main-container">
-      <input type="text" id="add-note-input" />
+         <p>Clear the input field when it gets focus:</p>
+      <input type="text" id="add-note-input" onfocus="this.value=''"/>
 
       <button id="add-note-button">Add note!</button>
 

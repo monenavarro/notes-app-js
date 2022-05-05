@@ -10,29 +10,43 @@ describe('Notes view', () => {
     it('displays 2 notes', () => {
         document.body.innerHTML = fs.readFileSync('./index.html');
     
-    const model = new NotesModel();
-    const view = new NotesView(model);
-    model.addNote('One note');
-    model.addNote('Second note');
-    view.displayNotes();
+        const model = new NotesModel();
+        const view = new NotesView(model);
+        model.addNote('One note');
+        model.addNote('Second note');
+        view.displayNotes();
 
-    expect(document.querySelectorAll('div.note').length).toEqual(2);
+        expect(document.querySelectorAll('div.note').length).toEqual(2);
 
     });
 
     it('clicks the button and adds a new note', () => {
         document.body.innerHTML = fs.readFileSync('./index.html');
     
-    const model = new NotesModel();
-    const view = new NotesView(model);
+        const model = new NotesModel();
+        const view = new NotesView(model);
     
-    const input = document.querySelector('#add-note-input');
-    input.value = 'Help me';
+        const input = document.querySelector('#add-note-input');
+        input.value = 'Help me';
 
-    const button = document.querySelector('#add-note-button')
-    button.click();
+        const button = document.querySelector('#add-note-button')
+        button.click();
     
-    expect(document.querySelectorAll('div.note').length).toEqual(1);
-    expect(document.querySelectorAll('div.note')[0].innerText).toEqual('Help me');
+        expect(document.querySelectorAll('div.note').length).toEqual(1);
+        expect(document.querySelectorAll('div.note')[0].innerText).toEqual('Help me');
+    });
+
+    it('clears the list of current notes before displaying', () => {
+        document.body.innerHTML = fs.readFileSync('./index.html');
+    
+        const model = new NotesModel();
+        const view = new NotesView(model);
+        model.addNote('one');
+        model.addNote('two');
+
+        view.displayNotes();
+        view.displayNotes();
+
+        expect(document.querySelectorAll('div.note').length).toEqual(2);
     });
 });
